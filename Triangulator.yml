@@ -1,0 +1,13 @@
+name: Triangulator
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python==3.8.0
+  - pandas
+  - plotly
+  - ipykernel
+  - matplotlib
+  - dash
+prefix: /home/jovyan/.conda_envs/Triangulator
+
