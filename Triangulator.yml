@@ -9,5 +9,7 @@ dependencies:
   - ipykernel
   - matplotlib
   - dash
+  - voila
+  - voila-gridstack
 prefix: /home/jovyan/.conda_envs/Triangulator
 
