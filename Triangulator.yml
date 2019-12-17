@@ -4,5 +4,9 @@ channels:
   - defaults
 dependencies:
   - python=3.8
+  - plotly
+  - dash
+  - jupyterlab-dash
+  - pandas
 prefix: /home/jovyan/.conda_envs/Triangulator
 
