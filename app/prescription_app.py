@@ -28,21 +28,50 @@ def pres_behavior_chart(bars):
     return fig
 
 
+
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
-app.title = 'SDS Decision Helper'
+app.title = 'Mission Prescription'
+
+
+left_text = '''
+## Mission Prescription
+### Supporting clinicians with locally optimised antibiotic prescription options
+90% of antibiotics are prescribed in primary care, using systems that push 100% of the mental load on the clinician.
+We propose to use **existing** AMR data to automatically select+suggest the **locally** most effective 1st line antibiotic based on a diagnosis.
+To nudge clinicians toward accepting the suggestion, our module shows them how often they prescribe 2nd and 3rd line antibiotics in relation to their peers.
+The module will therefore simultaneously increase the prescription of effective 1st line antibiotics, as well as decrease the number of 2nd and 3rd line antibiotics that are prescribed overall.
+'''
+
+right_text = '''
+## The project
+Mission prescription won [1st prize](https://www.jpiamr.eu/team-mission-prescription-is-the-winner-of-hacking-amr-2019) at the #HackingAMR2019 event of JPIAMR in Stockholm,
+the (improved) slides of the pitch can be found [here](https://speakerdeck.com/davhin/jpiamr-hacking-amr-2019-team-mission-prescription).
+The team members are Sabrina Wong ([@sabrinawong88](https://twitter.com/sabrinawong88)), David Barber, Sumeet Tiwari ([@sumeet_kumart07](https://twitter.com/sumeet_kumart07), Robert Koch Institute), Lennard Epping ([@LennardEpp](https://twitter.com/LennardEpp), Robert Koch Institute), Vendela Wiener, Ewan Gray, and David Hinrichs ([@davhin11](https://twitter.com/davhin11), idalab)
+'''
 
 app.layout = html.Div(children=[
+        html.Div([
+            html.Div([
+            dcc.Markdown(left_text),
+            ],
+                className='six columns'),
+            html.Div([
+            dcc.Markdown(right_text),
+            ],
+                className='six columns')
+                ],
+            className='row'),
     html.Div([
         html.Div([
+            html.Hr(),
+            html.Hr(),
             html.H4("Your diagnosis"),
             dcc.RadioItems(
                 id='diagnosis-options',
                 options=[{'label': i, 'value': i} for i in list(diagnosis_treatments.keys())],
                 value=list(diagnosis_treatments.keys())[0],
                 labelStyle={'display': 'inline-block'}
-            ),
-            html.Hr()],
-            className='six columns')],
+            )])],
         className='row')
     ,
     html.Div([
