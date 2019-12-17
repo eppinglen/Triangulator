@@ -6,6 +6,9 @@ import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output, State
 
+with open('../app/static_data.pckl', 'rb') as inf:
+    data = pickle.load(inf)
+
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 #diagnosis = ['Acute Cystitis Females >12 years old,Uncomplicated', 'Pneumonia- Adult: Community acquired, mild to moderate, Outpatient without comorbidity/modifying factors']
 diagnosis_treatments = {'Acute Cystitis Females >12 years old,Uncomplicated': ['1st level - TMP/SMX 1 DS tab po bid  for 3 days', '1st level - Trimethoprim 200mg once po daily for 3 days', '1st level - Macrobid 100 mg po bid for 5 days', '2nd level - Amoxicillin 500mg po TID for 7 days', '2nd level - Norfloxacin 400mg po bid for 3 days', '2nd level - Ciprofloxacin 250mg po bid for 3 days', '3rd level - Cephalexin 500mg po bid for 7 days', '3rd level - Levoquin 250mg po daily for 3 days'],
@@ -73,7 +76,7 @@ def send_prescription(n_clicks, prescription):
     if n_clicks > 0:
         return "Prescription of {} for patient {}".format(prescription.split('- ')[1], "Christina Miller, female, 25 years")
 
-    
+
 @app.callback(Output('output-prescription-final', 'children'),
               [Input('submit-button-final', 'n_clicks')],
               [State('output-prescription', 'children')])
@@ -81,12 +84,12 @@ def send_prescription_final(n_clicks, prescription):
     if n_clicks > 0:
         return "Sent prescription to pharmacy"
 
-    
+
 @app.callback(
     Output('dropdown-treatments', 'options'),
     [Input('diagnosis-options', 'value')])
 def set_dropdown_treatments_1st(selected_diagnosis):
-    
+
     return [{'label': i, 'value': i} for i in diagnosis_treatments[selected_diagnosis]]
 
 
@@ -107,4 +110,4 @@ def plot_prescribing_behavior(diagnosis):
 
 
 if __name__ == '__main__':
-    app.run_server(debug=True, port=8060)
+    app.run_server(host='0.0.0.0', port=8060)
